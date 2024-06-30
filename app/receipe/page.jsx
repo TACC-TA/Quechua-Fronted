@@ -1,3 +1,4 @@
+
 import React from "react";
 import Image from "next/image";
 import MarcaAyacucho from "@/public/Logos/MarcaAyacucho 1.svg";
