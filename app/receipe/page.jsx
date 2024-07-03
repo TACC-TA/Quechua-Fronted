@@ -1,12 +1,23 @@
 
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import MarcaAyacucho from "@/public/Logos/MarcaAyacucho 1.svg";
 
 export default function Page() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSendButtonEnabled, setIsSendButtonEnabled] = useState(false);
+  const [isClearButtonEnabled, setIsClearButtonEnabled] = useState(false);
+
+  useEffect(() => {
+    setIsSendButtonEnabled(userInput.trim().length > 0);
+  }, [userInput]);
+
+  useEffect(() => {
+    setIsClearButtonEnabled(messages.length > 0);
+  }, [messages]);
 
   const handleSend = () => {
     if (userInput.trim()) {
@@ -17,13 +28,22 @@ export default function Page() {
   };
 
   const handleClear = () => {
+    setIsModalOpen(true);
+  };
+
+  const confirmClear = () => {
     setMessages([]);
+    setIsModalOpen(false);
+  };
+
+  const cancelClear = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className="h-screen w-screen p-10 bg-white flex flex-col">
       <div className="flex flex-col items-center mb-6">
-        <div className="flex flex-row items-center bg-green-100 p-6 rounded-lg shadow-lg">
+        <div className="flex flex-row items-center bg-lime-400 p-6 rounded-lg shadow-lg">
           <h1 className="text-4xl font-bold text-center text-blue-600 mr-4">
             ¿Imatataq kunan yanunki?
           </h1>
@@ -56,17 +76,40 @@ export default function Page() {
         />
         <button
           onClick={handleSend}
-          className="p-4 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600"
+          disabled={!isSendButtonEnabled}
+          className={`p-4 rounded-r-lg ${isSendButtonEnabled ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
         >
           Apachiy
         </button>
         <button
           onClick={handleClear}
-          className="p-4 bg-red-500 text-white rounded-lg ml-4 hover:bg-red-600"
+          disabled={!isClearButtonEnabled}
+          className={`p-4 rounded-lg ml-4 ${isClearButtonEnabled ? "bg-red-500 text-white hover:bg-red-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
         >
           Chinkachiy
         </button>
       </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl mb-4">¿Segurochu borranki?</h2>
+            <div className="flex justify-end">
+              <button
+                onClick={confirmClear}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg mr-4 hover:bg-red-600"
+              >
+                Yuyachiy
+              </button>
+              <button
+                onClick={cancelClear}
+                className="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400"
+              >
+                Sayachiy
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
