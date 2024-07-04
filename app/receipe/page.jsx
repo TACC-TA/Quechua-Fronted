@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import MarcaAyacucho from "@/public/Logos/MarcaAyacucho 1.svg";
 import { getMessages } from "../api/translate.api";
-
+import "../css/principal.css"
 export default function Page() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
@@ -48,9 +48,9 @@ export default function Page() {
   };
 
   return (
-    <div className="h-screen w-screen p-10 bg-cover bg-center bg-yellow-800 flex flex-col">
+    <div className="fondo">
       <div className="flex flex-col items-center mb-6">
-        <div className="flex flex-row items-center bg-yellow-400 p-6 rounded-lg shadow-lg">
+        <div className="container">
           <h1 className="text-4xl font-bold text-center text-purple-950 mr-4">
             ¿Imatataq kunan yanunki?
           </h1>
@@ -63,7 +63,7 @@ export default function Page() {
           />
         </div>
       </div>
-      <div className="flex flex-col flex-grow bg-emerald-200 p-6 rounded-lg shadow-lg overflow-y-auto">
+      <div className="contenedorchat">
         {messages.map((msg, index) => (
           <div
             key={index}

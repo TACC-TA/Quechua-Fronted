@@ -1,0 +1,35 @@
+.container {
+    max-width: fit-content; /* Ancho máximo del contenedor */
+    max-height: fit-content;
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Agrega un poco de relleno interno */
+    background-color: #FFFFFF; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    text-align: center;
+}
+.fondo {
+    height: 100vh;
+    width: 100vw;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #a7d0ed, #5b53c5, #c38bca, #3b63de, #c6f197); /* Degradado con múltiples colores */
+    background-position: center;
+    display: flex; 
+    flex-direction: column;
+}
+.contenedorchat {
+    display: flex; /* Usar Flexbox */
+    flex-direction: column; /* Organizar los elementos en una columna */
+    flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
+
+    background-color: rgba(255, 255, 255, 0.406); /* Color de fondo blanco con transparencia */
+    backdrop-filter: blur(20px); /* Aplicar desenfoque */
+    
+    padding: 1.5rem; /* Padding (equivalente a p-6 en Tailwind CSS, donde 1rem = 16px) */
+    border-radius: 0.5rem; /* Bordes redondeados (equivalente a rounded-lg en Tailwind CSS) */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra (equivalente a shadow-lg en Tailwind CSS) */
+    overflow-y: auto; /* Habilitar el desplazamiento vertical si el contenido desborda */
+}
