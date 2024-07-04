@@ -41,10 +41,10 @@ export default function Page() {
   };
 
   return (
-    <div className="h-screen w-screen p-10 bg-white flex flex-col">
+    <div className="h-screen w-screen p-10 bg-cover bg-center bg-yellow-800 flex flex-col">
       <div className="flex flex-col items-center mb-6">
-        <div className="flex flex-row items-center bg-lime-400 p-6 rounded-lg shadow-lg">
-          <h1 className="text-4xl font-bold text-center text-blue-600 mr-4">
+        <div className="flex flex-row items-center bg-yellow-400 p-6 rounded-lg shadow-lg">
+          <h1 className="text-4xl font-bold text-center text-purple-950 mr-4">
             ¿Imatataq kunan yanunki?
           </h1>
           <Image
@@ -56,11 +56,11 @@ export default function Page() {
           />
         </div>
       </div>
-      <div className="flex flex-col flex-grow bg-green-100 p-6 rounded-lg shadow-lg overflow-y-auto">
+      <div className="flex flex-col flex-grow bg-emerald-200 p-6 rounded-lg shadow-lg overflow-y-auto">
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`mb-4 p-4 rounded-lg ${msg.type === "user" ? "bg-blue-400 text-white self-end" : "bg-green-400 text-white self-start"}`}
+            className={`mb-4 p-4 rounded-lg ${msg.type === "user" ? "bg-blue-500 text-white self-end" : "bg-green-400 text-white self-start"}`}
           >
             {msg.text}
           </div>
@@ -77,7 +77,7 @@ export default function Page() {
         <button
           onClick={handleSend}
           disabled={!isSendButtonEnabled}
-          className={`p-4 rounded-r-lg ${isSendButtonEnabled ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+          className={`p-4 rounded-r-lg ${isSendButtonEnabled ? "bg-blue-700 text-white hover:bg-blue-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
         >
           Apachiy
         </button>
