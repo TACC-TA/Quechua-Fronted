@@ -1,8 +1,8 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import MarcaAyacucho from "@/public/Logos/MarcaAyacucho 1.svg";
+import { getMessages } from "../api/translate.api";
 
 export default function Page() {
   const [messages, setMessages] = useState([]);
@@ -19,11 +19,18 @@ export default function Page() {
     setIsClearButtonEnabled(messages.length > 0);
   }, [messages]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (userInput.trim()) {
       setMessages([...messages, { type: "user", text: userInput }]);
+
       setUserInput("");
-      //Llamada a la API
+
+      try {
+        const data = await getMessages(userInput);
+        setMessages( messages => [...messages, { type: "bot", text: data.translate}]);
+      } catch (error) {
+        console.error("Error fetching translation:", error);
+      }
     }
   };
 
@@ -60,7 +67,11 @@ export default function Page() {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`mb-4 p-4 rounded-lg ${msg.type === "user" ? "bg-blue-500 text-white self-end" : "bg-green-400 text-white self-start"}`}
+            className={`mb-4 p-4 rounded-lg ${
+              msg.type === "user"
+                ? "bg-blue-500 text-white self-end"
+                : "bg-green-400 text-white self-start"
+            }`}
           >
             {msg.text}
           </div>
@@ -77,14 +88,22 @@ export default function Page() {
         <button
           onClick={handleSend}
           disabled={!isSendButtonEnabled}
-          className={`p-4 rounded-r-lg ${isSendButtonEnabled ? "bg-blue-700 text-white hover:bg-blue-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+          className={`p-4 rounded-r-lg ${
+            isSendButtonEnabled
+              ? "bg-blue-700 text-white hover:bg-blue-600"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
         >
           Apachiy
         </button>
         <button
           onClick={handleClear}
           disabled={!isClearButtonEnabled}
-          className={`p-4 rounded-lg ml-4 ${isClearButtonEnabled ? "bg-red-500 text-white hover:bg-red-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+          className={`p-4 rounded-lg ml-4 ${
+            isClearButtonEnabled
+              ? "bg-red-500 text-white hover:bg-red-600"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
         >
           Chinkachiy
         </button>
