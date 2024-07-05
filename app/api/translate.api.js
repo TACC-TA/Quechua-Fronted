@@ -3,7 +3,7 @@
 const getMessages = async (message) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/translate/`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/web/buscar`,
       {
         method: "POST", // Asumiendo que el servidor espera un POST
         headers: {
@@ -17,8 +17,9 @@ const getMessages = async (message) => {
       throw new Error(`Error: ${response.status}`); // Manejo de respuestas de error
     }
 
-    const data = await response.json(); // Asumiendo que el servidor devuelve JSON
-    return data; // Retorna los datos procesados
+    const data = await response.json(); 
+
+    return data; 
   } catch (error) {
     console.error("Error fetching translation:", error);
     throw error; // Propaga el error para manejo adicional si es necesario
